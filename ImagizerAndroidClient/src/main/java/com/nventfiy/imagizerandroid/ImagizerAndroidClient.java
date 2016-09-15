@@ -15,6 +15,15 @@ public class ImagizerAndroidClient extends ImagizerClient {
     private Context context;
 
     /**
+     * Constructs Imagizer client using Imagizer demo service
+     *
+     * @param context the current android context
+     */
+    public ImagizerAndroidClient(Context context) {
+        this.context = context;
+    }
+
+    /**
      * Constructs Imagizer client
      *
      * @param context the current android context
@@ -45,14 +54,22 @@ public class ImagizerAndroidClient extends ImagizerClient {
      */
     @Override
     public ImagizerAndroidUrl buildUrl(String path) {
-        ImagizerAndroidUrl url = new ImagizerAndroidUrl(this.host, this.useHttps, path);
+        ImagizerAndroidUrl url = new ImagizerAndroidUrl(this.imagizerHost, this.useHttps, path);
 
         if (this.autoDpr) {
             url.setDpr(getScreenScale());
         }
 
+        if (this.dpr > 1) {
+            url.addParam("dpr", this.dpr);
+        }
+
         if (this.format != null) {
             url.addParam("format", this.format);
+        }
+
+        if (this.originHost != null) {
+            url.addParam("hostname", this.originHost);
         }
 
         url.setQuality(this.quality);
@@ -69,10 +86,14 @@ public class ImagizerAndroidClient extends ImagizerClient {
      */
     @Override
     public ImagizerAndroidUrl buildUrl(String path, Map<String, Object> params) {
-        ImagizerAndroidUrl url = new ImagizerAndroidUrl(this.host, this.useHttps, path);
+        ImagizerAndroidUrl url = new ImagizerAndroidUrl(this.imagizerHost, this.useHttps, path);
 
         if (this.autoDpr) {
             url.setDpr(getScreenScale());
+        }
+
+        if (this.dpr > 1) {
+            url.addParam("dpr", this.dpr);
         }
 
         url.setQuality(this.quality);
@@ -81,6 +102,10 @@ public class ImagizerAndroidClient extends ImagizerClient {
 
         if (this.format != null) {
             url.addParam("format", this.format);
+        }
+
+        if (this.originHost != null) {
+            url.addParam("hostname", this.originHost);
         }
 
         return url;
@@ -108,8 +133,14 @@ public class ImagizerAndroidClient extends ImagizerClient {
      * @return double the device pixel ratio
      */
     private double getScreenScale() {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        return metrics.density;
+        double scale = DEFAULT_DPR;
+
+        if (this.context != null) {
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            scale = metrics.density;
+        }
+
+        return scale;
     }
 
     /**
