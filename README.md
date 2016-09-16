@@ -2,7 +2,7 @@
 
 The official Android Client for the Imagizer Media Engine.
 
-The Imagizer Media Engine accelerates media delivery to your mobile Apps or Webpages by dynamically rescaling, cropping, and compressing images in real time. See all Imagizer features in our [doc](http://demo.imagizercdn.com/doc).
+The Imagizer Media Engine accelerates media delivery to your mobile Apps or Web pages by dynamically rescaling, cropping, and compressing images in real time. See all Imagizer features in our [doc](http://demo.imagizercdn.com/doc).
 
 ## Install from JCenter or Maven
 ```gradle
@@ -101,4 +101,4 @@ System.out.println(url);
 ```
 
 ## Example Android Application
-See our [example application](https://github.com/Nventify/ImagizerAndroidExample) for more details on bulding a basic photo app with the ImagizerEngine and an imageloader library such as the [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader).
+See our [example application](https://github.com/Nventify/ImagizerAndroidExample) for more details on building a basic photo app with the ImagizerEngine and an image loader library such as the [Android Universal Image Loader](https://github.com/nostra13/Android-Universal-Image-Loader).
